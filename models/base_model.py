@@ -34,7 +34,12 @@ class BaseModel:
 
     """
     A method that
-    - Returns a dictionary containing all keys/values of __dict__ of the instance
+    Converts the instance attributes to a dictionary and adds metadata.
+    Returns a dictionary containing the instance attributes and metadata.
     """
     def to_dict(self):
-        pass
+        dictionary = self.__dict__.copy()
+        dictionary['__class__'] = self.__class__.__name__
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+        return (dictionary)
