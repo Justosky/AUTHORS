@@ -9,14 +9,28 @@ class BaseModel:
     
     """
     A constructor for the BaseModel class that
+    - That checks if key worded arguments is present and
+    - Create an instance of the BaseModel class using the arguments provided
+    - If no key worded arguments is provided it
     - Assigns a new instance of the BaseModel class a unique identifier (UUID)
     - Registers the date a new instance of the BaseModel class is created and
     - Initializes updated timestamp to creation time
     """
-    def __init__(self, *args, **kwargs):
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+    def __init__(self, **kwargs):
+        if kwargs:
+            for key in kwargs:
+                if key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(
+                        kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                elif key == "created_at":
+                    self.__dict__[key] = datetime.strptime(
+                       kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                else:
+                    self.__dict__[key] = kwargs[key]
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     """
     A special method that returns a human-readable string representation of the object
