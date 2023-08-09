@@ -16,7 +16,7 @@ class BaseModel:
     - Registers the date a new instance of the BaseModel class is created and
     - Initializes updated timestamp to creation time
     """
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         if kwargs:
             for key in kwargs:
                 if key == "updated_at":
