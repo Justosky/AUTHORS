@@ -5,8 +5,10 @@ from datetime import datetime
 from uuid import uuid4
 
 """ Defining the BaseModel class """
+
+
 class BaseModel:
-    
+
     """
     A constructor for the BaseModel class that
     - That checks if key worded arguments is present and
@@ -33,15 +35,17 @@ class BaseModel:
             self.updated_at = self.created_at
 
     """
-    A special method that returns a human-readable string representation of the object
+    A special method that
+    - Returns a human-readable string representation of the object
     Format: "[<class name>] (<id>) <attributes>"
-    """ 
+    """
     def __str__(self):
         return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
-    
-    """ 
+
+    """
     A method that
-    - updates the public instance attribute 'updated_at' with the current datetime
+    - updates the public instance attribute 'updated_at' with
+        the current datetime
     """
     def save(self):
         self.updated_at = datetime.now()
@@ -57,3 +61,6 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return (dictionary)
+
+    def greet(self, *arg):
+        print(f"I greet you {arg}")
