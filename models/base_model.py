@@ -55,6 +55,11 @@ class BaseModel:
     Converts the instance attributes to a dictionary and adds metadata.
     Returns a dictionary containing the instance attributes and metadata.
     """
+     
+    def save(self):
+        self.updated_at = datetime.now()
+        storage.save()
+    
     def to_dict(self):
         dictionary = self.__dict__.copy()
         dictionary['__class__'] = self.__class__.__name__
